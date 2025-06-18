@@ -69,6 +69,9 @@ void setup() {
   catch(Exception e) {
     e.printStackTrace();
   }
+  
+  //ELIMINATING CURSOR
+  noCursor();
 }
 
 void draw() {
@@ -123,14 +126,20 @@ void drawMap() {
   for (int x = 0; x < mapLayout.width; x++) {
     for (int y = 0; y < mapLayout.height; y++) {
       color c = mapLayout.get(x, y);
+      
+      pushMatrix(); 
+      translate(x*gridSize, 0, y*gridSize); 
+      fill(c); 
+      box(gridSize, 50, gridSize); 
+      popMatrix(); 
     }
   }
 }
 
 void drawGrid(int start, int end, int level) {
-  for (int x = -1000; x <= 1000; x = x + gridSize) {
+  for (int x = -2000; x <= 20002; x = x + gridSize) { //total is 40 blocks wide
     strokeWeight(1);
-    line(x, level, -1000, x, level, 1000);
-    line(-1000, level, x, 1000, level, x);
+    line(x, level, -2000, x, level, 2000);
+    line(-2000, level, x, 2000, level, x);
   }
 }
