@@ -11,11 +11,15 @@ Robot rbt;
 color black = color(0);
 color white = color(255);
 color red = color(255, 0, 0);
+color orange = color(255, 128, 0); 
 color green = color(0, 255, 0);
 color blue = color(0, 0, 255);
+color yellow = color(255, 255, 0); 
 color purple = color(120, 81, 169);
+color brown = color(128, 0, 0); 
 
 //TEXTURES
+PImage lava;
 
 //MAP
 int gridSize;
@@ -24,7 +28,7 @@ PImage mapLayout;
 //WEATHER
 
 //KEYBOARD
-boolean wKey, aKey, sKey, dKey, spaceKey;
+boolean wKey, aKey, sKey, dKey, spaceKey, shiftKey;
 
 //CAMERA
 float eyeX, eyeY, eyeZ, focusX, focusY, focusZ, tiltX, tiltY, tiltZ;
@@ -39,11 +43,14 @@ void setup() {
   stroke(white);
 
   //KEYBOARD SETUP
-  wKey = aKey = sKey = dKey = false;
+  wKey = aKey = sKey = dKey = spaceKey = shiftKey = false;
 
   //MAP SETTINGS
   gridSize = 100;
   mapLayout = loadImage("map.png");
+
+  //TEXTURE SETTINGS
+  lava = loadImage("Diamond.png");
 
   //CAMERA SETUP
   cameraHeight = gridSize*2;
@@ -69,7 +76,7 @@ void setup() {
   catch(Exception e) {
     e.printStackTrace();
   }
-  
+
   //ELIMINATING CURSOR
   noCursor();
 }
@@ -107,6 +114,7 @@ void controlCamera() {
     eyeX = eyeX + cos(leftRightHeadAngle+radians(90))*20;
   }
   if (spaceKey) eyeY = eyeY -20;
+  if (shiftKey) eyeY = eyeY + 20;
 
   leftRightHeadAngle = leftRightHeadAngle + (mouseX - pmouseX)*0.01;
   upDownHeadAngle = upDownHeadAngle + (mouseY - pmouseY)*0.01;
@@ -126,20 +134,19 @@ void drawMap() {
   for (int x = 0; x < mapLayout.width; x++) {
     for (int y = 0; y < mapLayout.height; y++) {
       color c = mapLayout.get(x, y);
-      
-      pushMatrix(); 
-      translate(x*gridSize, 0, y*gridSize); 
-      fill(c); 
-      box(gridSize, 50, gridSize); 
-      popMatrix(); 
+      fill(c);
+      pushMatrix();
+      translate(x*gridSize-3000, 0, y*gridSize-3000);
+      box(gridSize, gridSize, gridSize);
+      popMatrix();
     }
   }
 }
 
 void drawGrid(int start, int end, int level) {
-  for (int x = -2000; x <= 20002; x = x + gridSize) { //total is 40 blocks wide
+  for (int x = -3000; x <= 3000; x = x + gridSize) { //total is 60 blocks wide
     strokeWeight(1);
-    line(x, level, -2000, x, level, 2000);
-    line(-2000, level, x, 2000, level, x);
+    line(x, level, -3000, x, level, 3000);
+    line(-3000, level, x, 3000, level, x);
   }
 }
