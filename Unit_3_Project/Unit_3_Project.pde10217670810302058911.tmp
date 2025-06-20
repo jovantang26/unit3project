@@ -148,9 +148,11 @@ void drawMap() {
     for (int y = 0; y < mapLayout.height; y++) {
       color c = mapLayout.get(x, y);
       if (c == black) {
-        texturedCube(x*gridSize-3000, gridSize, y*gridSize-3000, stoneBrick, gridSize);
+        texturedCube(x*gridSize-3000, 2*gridSize, y*gridSize-3000, water, gridSize);
+       
       } else if (c == darkBlue) {
-         texturedCube(x*gridSize-3000, 0, y*gridSize-3000, stone, gridSize);
+         texturedCube(x*gridSize-3000, gridSize, y*gridSize-3000, stone, gridSize);
+       
       }else if (c == blue) {
         texturedCube(x*gridSize-3000, 0, y*gridSize-3000, water, gridSize);
       } else if (c == yellow) {
@@ -164,6 +166,25 @@ void drawMap() {
       } else if (c == brown) {
          texturedCube(x*gridSize-3000, 4*-gridSize, y*gridSize-3000, stoneBrick, gridSize);
       }
+
+
+      //fill(c);
+      //pushMatrix();
+      //translate(x*gridSize-3000, 0, y*gridSize-3000);
+      //if (c == blue) {
+      // // box(gridSize, gridSize, gridSize);
+      //} else if (c == yellow) {
+      //  box(gridSize, 2*gridSize, gridSize);
+      //} else if (c == red) {
+      //  box(gridSize, 2*gridSize, gridSize);
+      //} else if (c == green) {
+      //  box(gridSize, 3*gridSize, gridSize);
+      //} else if (c == orange) {
+      //  box(gridSize, 4*gridSize, gridSize);
+      //} else if (c == brown) {
+      //  box(gridSize, 5*gridSize, gridSize);
+      //}
+      //popMatrix();
     }
   }
 }
